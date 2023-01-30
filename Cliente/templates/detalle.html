@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block headcss %}
+    <link rel="stylesheet" href="{% static "css/diseño.css" %}">
+{% endblock %}
+
+{% block regresar %}
+     <a class="btn btn btn-danger" href="{{url_anterior}}">
+            Regresar
+      </a>
+{% endblock %}
+
+{% block main %}
+
+
+     <div class="container-lg table-responsive ">
+        <h1 class="nom_empr"> <b>{{ titulo }}</b></h1>
+         <table class="table table-hover table-bordered " >
+           <thead class="table-dark" >
+             <tr>
+               <th scope="col">#</th>
+               <th scope="col" >Nombres</th>
+               <th scope="col">Apellido</th>
+               <th scope="col">Genero</th>
+               <th scope="col">Cédula</th>
+               <th scope="col">Edad</th>
+               <th scope="col">Fecha_ingreso</th>
+               <th scope="col">Acciones a Efectuar</th>
+             </tr>
+           </thead>
+           <tbody>
+             {% block rows %}
+               <tbody>
+
+                {%for object in cliente %}
+                    <tr>
+
+                        <td>{{ object.id}}</td>
+                        <td>{{ object.nombre}}</td>
+                        <td>{{ object.apellido}}</td>
+                        <td>{{ object.genero}}</td>
+                        <td>{{ object.Cedula}}</td>
+                        <td>{{ object.Edad}}</td>
+                        <td>{{ object.fecha_ingreso}}</td>
+                        <td>
+                            <a href="{% url 'Cliente_gym:eliminar_cliente' object.id %}"><button>✖️</button></a>
+                        </td>
+                    </tr>
+
+                {% endfor%}
+                </tbody>
+             {% endblock %}
+
+         </table>
+     </div>
+
+     <div class=" container row row-cols-2  row-cols-lg-1 g-2 g-lg-4 cent">
+         <div class="col" >
+            <a href="{% url 'Cliente_gym:crear_cliente' %}">
+                <button  class="btn btn-info btn-lg me-md-5" >
+                    Añadir clientes
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                             fill="currentColor" class="bi bi-arrow-up-circle" viewBox="0 0 16 16">
+                       <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0
+                       1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1
+                       1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
+                       </svg>
+                </button>
+            </a>
+             <a href="{% url 'Mensualidad_gym:menu' %}">
+                 <button class="btn btn-success btn-lg">
+                    Ir a la pantalla de Mensualidad
+                </button>
+             </a>
+         </div>
+     </div>
+
+{% endblock %}

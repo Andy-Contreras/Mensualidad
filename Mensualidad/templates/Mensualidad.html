@@ -1,0 +1,61 @@
+{% extends 'consulta.html' %}
+{% load static %}
+
+{% block headcss %}
+    <link rel="stylesheet" href="{% static "css/diseño.css" %}">
+{% endblock %}
+
+{% block regresar %}
+     <a class="btn btn btn-danger" href="{{url_anterior}}">
+            Regresar
+      </a>
+{% endblock %}
+
+    <h2>Aqui esta la barra</h2>
+{% block search %}
+    <form action="{% url 'Mensualidad_gym:menu' %}" method="GET">
+      <div class="input-group mb-3">
+        <input type="text" name="query" value="{{ query }}" class="form-control" placeholder="Buscar... por nombre" id="idInputSearch" aria-describedby="basic-addon2"/>
+        <button type="submit" class="btn btn-primary mr-1" id="idSearchSp">Buscar</button>
+      </div>
+    </form>
+{% endblock %}
+
+
+
+{% block columns %}
+    <tr class="text-center">
+        <th scope="col" style="width: 5%;">Id</th>
+        <th scope="col" style="width: 7%;">Cliente</th>
+        <th scope="col" style="width: 5%;">Precio</th>
+        <th scope="col" style="width: 10%;">fecha_inicio</th>
+        <th scope="col" style="width: 10%;">fecha_finalizacion</th>
+        <th scope="col" style="width: 10%;">Estado</th>
+        <th scope="col" style="width: 10%;">Opciones</th>
+
+    </tr>
+{% endblock %}
+
+{% block rows %}
+    {% for object in mensualidad %}
+        <tr class="text-center" >
+            <td>{{ object.id}}</td>
+            <td>{{ object.cliente }}</td>
+            <td>{{ object.precio }}</td>
+            <td>{{ object.fecha_inicio}}</td>
+            <td>{{ object.fecha_finalizacion }}</td>
+            <td>{% if  object.precio != 0 %} 
+                    Pagado
+                {% elif object.precio == 0 %}
+                Pendiente 
+                {% endif %}</td>
+             <td class="acciones">
+                <a href="{% url 'Mensualidad_gym:actualizar_mensualidad' object.id %}"> &#128736;&#65039;</a>
+                <a href="{% url 'Mensualidad_gym:eliminar_mensualidad' object.id%}">❌</a>
+            </td>
+        </tr>
+    {% endfor %}
+
+{% endblock %}
+
+
