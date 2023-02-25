@@ -44,12 +44,14 @@
             <td>{{ object.precio }}</td>
             <td>{{ object.fecha_inicio}}</td>
             <td>{{ object.fecha_finalizacion }}</td>
-            <td>{% if  object.precio != 0 %} 
+            <td>{% if  object.precio == 15.00 %} 
                     Pagado
-                {% elif object.precio == 0 %}
-                Pendiente 
+                {% elif object.precio == 0.00 %}
+                    Inactivo 
+                {% elif object.precio >= 1.00 or object.precio <= 14.00 %}
+                    Saldo pendiente
                 {% endif %}</td>
-             <td class="acciones">
+            <td class="acciones">
                 <a href="{% url 'Mensualidad_gym:actualizar_mensualidad' object.id %}"> &#128736;&#65039;</a>
                 <a href="{% url 'Mensualidad_gym:eliminar_mensualidad' object.id%}">❌</a>
             </td>
@@ -57,5 +59,9 @@
     {% endfor %}
 
 {% endblock %}
+
+
+
+
 
 

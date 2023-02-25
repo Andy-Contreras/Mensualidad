@@ -11,10 +11,10 @@ class CabeceraMensual(ModelForm):
             'cliente': forms.Select(attrs={'class': 'form-control '}),
             'precio': forms.NumberInput(attrs={'class': 'form-control'}),
             'fecha_inicio': forms.DateInput(
-                         format=('%Y-%m-%d'),
-                         attrs={'class': 'form-control', 'type': 'date'}),
+                        format=('%Y-%m-%d'),
+                        attrs={'class': 'form-control', 'type': 'date', 'id':'fecha'}),
             'fecha_finalizacion': forms.DateInput(
-                         format=('%Y-%m-%d'),
-                         attrs={'class': 'form-control', 'type': 'date'})
+                        format=('%Y-%m-%d'),
+                        attrs={'class': 'form-control', 'id' : 'fecha_final'})
         }
 
